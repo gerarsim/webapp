@@ -36,6 +36,7 @@ jobs:
         AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
       run: terraform plan -no-color
       continue-on-error: true
+      
     - uses: actions/github-script@v2
       name: Runs only on pull request
       if: github.event_name == 'pull_request'
