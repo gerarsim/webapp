@@ -26,12 +26,8 @@ jobs:
 
     - name: Terraform fmt
       id: fmt
-      run: terraform fmt -check
+      run: terraform fmt
       continue-on-error: true
-
-    - name: Terraform Validate
-      id: validate
-      run: terraform validate -no-color
 
     - name: Terraform Plan
       id: plan
@@ -40,7 +36,7 @@ jobs:
         AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
       run: terraform plan -no-color
       continue-on-error: true
-
+      
     - uses: actions/github-script@v2
       name: Runs only on pull request
       if: github.event_name == 'pull_request'
@@ -68,6 +64,7 @@ jobs:
             repo: context.repo.repo,
             body: output
           })
-    #- name: Terraform Apply
-     #  if:github.ref == 'refs/heads/master' && github.event_name == 'push'
-      # run:terraform apply -auto-approve
+    
+    - name: Terraform Apply
+       if:github.ref == 'refs/heads/master' && github.event_name == 'push'
+       run:terraform apply -auto-approve
