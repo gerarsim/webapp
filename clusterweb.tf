@@ -14,8 +14,8 @@ resource "aws_ecs_capacity_provider" "capacity_provider" {
     managed_termination_protection = "ENABLED"
 
     managed_scaling {
-      status          = "ENABLED"
-      target_capacity = 100
+      status                    = "ENABLED"
+      target_capacity           = 100
       minimum_scaling_step_size = 1
     }
   }
